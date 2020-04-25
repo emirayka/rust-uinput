@@ -37,6 +37,9 @@ pub enum Event {
 
 	/// Absolute movement event.
 	Absolute(Absolute),
+
+	/// Misc event
+	Misc(Msc),
 }
 
 impl Kind for Event {
@@ -48,6 +51,7 @@ impl Kind for Event {
 			&Event::Controller(ref v) => v.kind(),
 			&Event::Relative(ref v)   => v.kind(),
 			&Event::Absolute(ref v)   => v.kind(),
+			&Event::Misc(ref v)   => v.kind(),
 		}
 	}
 }
@@ -61,6 +65,7 @@ impl Code for Event {
 			&Event::Controller(ref v) => v.code(),
 			&Event::Relative(ref v)   => v.code(),
 			&Event::Absolute(ref v)   => v.code(),
+			&Event::Misc(ref v)   => v.code(),
 		}
 	}
 }
@@ -76,3 +81,6 @@ pub use self::relative::Relative;
 
 pub mod absolute;
 pub use self::absolute::Absolute;
+
+pub mod misc;
+pub use self::misc::Msc;

@@ -228,6 +228,17 @@ impl Builder {
 
 				Ok(self)
 			}
+
+			Event::Misc(value) => {
+				unsafe {
+					try!(Errno::result(ui_set_evbit(self.fd, value.kind())));
+					try!(Errno::result(ui_set_absbit(self.fd, value.code())));
+				}
+
+				self.abs = Some(value.code());
+
+				Ok(self)
+			}
 		}
 	}
 
